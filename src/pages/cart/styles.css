@@ -28,7 +28,7 @@
     border: none;
 }
 
-/* Remove Button */
+
 .cart-items-item .cr {
     cursor: pointer;
     color: tomato;
@@ -118,5 +118,3 @@
 .cart-promocode-input button:hover {
     opacity: 0.9;
 }
-
-/* Respons*
