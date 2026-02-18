@@ -8,20 +8,20 @@ import Footer from "../components/footer";
 const router = createBrowserRouter([
 
   {
-    path: "/", 
-    element:<Home />,
+    path: "/",
+    element: <Home />,
   },
   {
-    path: "/cart", 
-    element:<Cart />,
+    path: "/cart",
+    element: <Cart />,
   },
   {
-    path: "/order", 
-    element:<PlaceOrder />,
+    path: "/order",
+    element: <PlaceOrder />,
   },
-    {
-    path: "/footer", 
-    element:<Footer />,
+  {
+    path: "/footer",
+    element: <Footer />,
   },
 ]);
 export default router;

@@ -12,8 +12,8 @@ const PlaceOrder = () => {
       <Navbar />
 
       <form className='place-order'>
-        
-        
+
+
         <div className='place-order-left'>
           <p className='title'>Delivery Information</p>
 
@@ -38,7 +38,7 @@ const PlaceOrder = () => {
           <input type="text" placeholder='Phone' />
         </div>
 
-      
+
         <div className='place-order-right'>
           <div className='cart-total'>
             <h2>Cart Total</h2>
@@ -60,8 +60,8 @@ const PlaceOrder = () => {
             <div className='cart-total-details'>
               <b>Total</b>
               <b>
-                ${getTotalCartAmount() === 0 
-                  ? 0 
+                ${getTotalCartAmount() === 0
+                  ? 0
                   : getTotalCartAmount() + 2}
               </b>
             </div>

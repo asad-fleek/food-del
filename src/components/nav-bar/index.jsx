@@ -9,12 +9,12 @@ const Navbar = () => {
 
     const [menu, setMenu] = useState("menu")
     const [showLogin, setshowLogin] = useState(false)
-    const {getTotalCartAmount} =useContext(StoreContext)
-    
-    
+    const { getTotalCartAmount } = useContext(StoreContext)
+
+
     return (
         <>
-        {showLogin && <LoginPopup />}
+            {showLogin && <LoginPopup />}
             <div className='navbar'>
                 <Link to='/'><img src={assets.logo} alt="logo" /></Link>
                 <ul className='navbar-menu'>
@@ -26,10 +26,10 @@ const Navbar = () => {
                 <div className='navbar-right'>
                     <img src={assets.search_icon} alt="icon" />
                     <div className='navbar-search-icon'>
-                      <Link to='/cart'><img src={assets.basket_icon} alt="icon" /></Link>
-                        <div className={getTotalCartAmount()===0?"":"dot"}></div>
+                        <Link to='/cart'><img src={assets.basket_icon} alt="icon" /></Link>
+                        <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
                     </div>
-                    <button onClick={()=>setshowLogin(true)}>Sign In</button>
+                    <button onClick={() => setshowLogin(true)}>Sign In</button>
                 </div>
             </div>
         </>
