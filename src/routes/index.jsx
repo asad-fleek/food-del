@@ -19,9 +19,6 @@ const router = createBrowserRouter([
     path: "/order",
     element: <PlaceOrder />,
   },
-  {
-    path: "/footer",
-    element: <Footer />,
-  },
+ 
 ]);
 export default router;
