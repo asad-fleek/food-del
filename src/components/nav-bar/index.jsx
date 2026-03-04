@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./styles.css";
 import { assets } from "../../utiles/image";
 import LoginPopup from "../login-popup";
@@ -9,7 +9,14 @@ const Navbar = () => {
     const [menu, setMenu] = useState("home");
     const [showLogin, setShowLogin] = useState(false);
 
-    const { getTotalCartAmount } = useContext(StoreContext);
+    const navigate = useNavigate();
+
+    const { getTotalCartAmount, token, setToken } = useContext(StoreContext);
+    const logout = () => {
+        localStorage.removeItem("token");
+        setToken("");
+        navigate("/")
+    }
 
     return (
         <>
@@ -67,8 +74,25 @@ const Navbar = () => {
                         </Link>
                         {getTotalCartAmount() > 0 && <div className="dot"></div>}
                     </div>
+                    {!token ? (
+                        <button onClick={() => setShowLogin(true)}>Sign In</button>
+                    ) : (
+                        <div className="navbar-profile">
+                            <img src={assets.profile_icon} alt="icon" />
+                            <ul className="nav-profile-dropdown">
+                                <li>
+                                    <img src={assets.bag_icon} alt="icon" />
+                                    <p>Orders</p>
+                                </li>
+                                <hr />
+                                <li onClick={logout}>
+                                    <img src={assets.logout_icon} alt="icon" />
+                                    <p>Logout</p>
+                                </li>
+                            </ul>
+                        </div>
+                    )}
 
-                    <button onClick={() => setShowLogin(true)}>Sign In</button>
                 </div>
             </div>
         </>

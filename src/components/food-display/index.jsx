@@ -9,13 +9,16 @@ const FoodDisplay = ({ category }) => {
     <div className='food-display' id='food-display'>
       <h2>Top dishes near you</h2>
       <div className="food-display-list">
-        {food_list.map((item, index) => {
+        {
+        food_list?.length >= 0 ? 
+        
+        food_list?.map((item, index) => {
           // eslint-disable-next-line no-cond-assign, no-constant-condition, no-constant-binary-expression
           if (category = "All" || category === item.category) {
             return <FoodItem key={index} id={item._id} name={item.name} description={item.description} price={item.price} image={item.image} />
-          }
-
-        })}
+          } })
+        :<h1>No food Found</h1>
+      }
       </div>
     </div>
   )
