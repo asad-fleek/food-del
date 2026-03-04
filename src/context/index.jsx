@@ -1,5 +1,6 @@
-import { createContext, useState } from "react";
-import { food_list } from '../utiles/image'
+import axios from "axios";
+import { createContext, useEffect, useState } from "react";
+
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const StoreContext = createContext(null)
@@ -7,9 +8,11 @@ export const StoreContext = createContext(null)
 const StoreContextProvider = (props) => {
 
     const [cartItems, setcartItems] = useState({});
+    const url = "http://localhost:4000"
+    const [token, setToken] = useState("");
+    const [food_list, setFood_list] = useState([])
 
-    const addtoCart = (itemId) => {
-        console.log(itemId, "Asad");
+    const addtoCart = async (itemId) => {
 
         if (!cartItems[itemId]) {
             setcartItems((prev) => ({ ...prev, [itemId]: 1 }))
@@ -17,13 +20,16 @@ const StoreContextProvider = (props) => {
         else {
             setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] + 1 }))
         }
-        console.log(cartItems, "cartitems");
+        if (token) {
+            await axios.post(url+"/api/cart/add",{itemId},{headers:{token}})
+        }
 
     }
     const removeFromCart = (itemId) => {
         setcartItems((prev) => ({ ...prev, [itemId]: prev[itemId] - 1 }))
     }
 
+    // eslint-disable-next-line no-unused-vars
     const getTotalCartAmount = () => {
         let totalAmount = 0;
         for (const item in cartItems) {
@@ -32,23 +38,42 @@ const StoreContextProvider = (props) => {
                 totalAmount += itemInfo.price * cartItems[item];
             }
 
+            return totalAmount;
         }
-        return totalAmount;
     }
-
-    const contextValue = {
-        food_list,
-        cartItems,
-        setcartItems,
-        addtoCart,
-        removeFromCart,
-        getTotalCartAmount
-
+    const fetchFoodList = async () => {
+        const response = await axios.get(url + "/api/food/list");
+        setFood_list(response.data.data)
     }
-    return (
-        <StoreContext.Provider value={contextValue}>
-            {props.children}
-        </StoreContext.Provider>
-    )
+    useEffect(() => {
+        async function loadData() {
+            await fetchFoodList();
+            if (localStorage.getItem("token")) {
+                setToken(localStorage.getItem("token"))
+            }
+        }
+        loadData();
+    }, [])
+
+
+
+
+const contextValue = {
+    food_list,
+    cartItems,
+    setcartItems,
+    addtoCart,
+    removeFromCart,
+    getTotalCartAmount,
+    url,
+    token,
+    setToken
+
+}
+return (
+    <StoreContext.Provider value={contextValue}>
+        {props.children}
+    </StoreContext.Provider>
+)
 }
 export default StoreContextProvider;
