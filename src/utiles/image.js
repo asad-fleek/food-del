@@ -53,6 +53,12 @@ import bag_icon from '/images/frontend_assets/bag_icon.png'
 import logout_icon from '/images/frontend_assets/logout_icon.png'
 import parcel_icon from '/images/frontend_assets/parcel_icon.png'
 
+// admin assests
+import add_icon from '/images/admin_assets/add_icon.png'
+import order_icon from '/images/admin_assets/order_icon.png'
+import profile_image from '/images/admin_assets/profile_image.png'
+import upload_area from '/images/admin_assets/upload_area.png'
+
 export const assets = {
     logo,
     basket_icon,
@@ -72,7 +78,11 @@ export const assets = {
     profile_icon,
     logout_icon,
     bag_icon,
-    parcel_icon
+    parcel_icon,
+    add_icon,
+    order_icon,
+    profile_image,
+    upload_area
 }
 
 
